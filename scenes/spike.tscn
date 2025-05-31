@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://3dudg3qarc4e"]
+
+[ext_resource type="Texture2D" uid="uid://cd6cpvoaog05k" path="res://assets/tiles/world_tiles.png" id="1_ljd5v"]
+
+[node name="Spike" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_ljd5v")
+region_enabled = true
+region_rect = Rect2(64, 96, 16, 16)

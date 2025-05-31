@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://b83g6s8v5xygn"]
+
+[ext_resource type="Texture2D" uid="uid://djwqkwedbe8jw" path="res://assets/tiles/platforms.png" id="1_rxra5"]
+
+[sub_resource type="GDScript" id="GDScript_ba0x2"]
+script/source = "extends Node2D
+
+# Enum for clarity
+enum PlatformType { GREEN, YELLOW, BLUE, RED }
+enum PlatformSize { BIG, SMALL }
+
+@export var platform_type: PlatformType = PlatformType.GREEN
+@export var platform_size: PlatformSize = PlatformSize.BIG
+
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
+
+# Constants
+const TILE_WIDTH = 64
+const TILE_HEIGHT = 16
+
+func _ready():
+	update_platform()
+
+func update_platform():
+	var type_index = platform_type
+	var size_index = platform_size
+
+	# Set region of the sprite
+	sprite.texture = preload(\"res://assets/tiles/platforms.png\")
+	sprite.region_enabled = true
+	sprite.region_rect = Rect2(
+		Vector2(0, (type_index * 2 + size_index) * TILE_HEIGHT),
+		Vector2(TILE_WIDTH, TILE_HEIGHT)
+	)
+
+	# Update collision shape
+	var shape = RectangleShape2D.new()
+	shape.extents = Vector2(TILE_WIDTH / 2, TILE_HEIGHT / 2)
+	collision.shape = shape
+	collision.position = Vector2(TILE_WIDTH / 2, TILE_HEIGHT / 2)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ba0x2"]
+size = Vector2(48, 9.5)
+
+[node name="Platform" type="AnimatableBody2D"]
+script = SubResource("GDScript_ba0x2")
+platform_type = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rxra5")
+region_enabled = true
+region_rect = Rect2(0, 3, 48, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_ba0x2")
+one_way_collision = true
+one_way_collision_margin = 0.0
