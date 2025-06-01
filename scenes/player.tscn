@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://1bdbouyccct4"]
+[gd_scene load_steps=10 format=3 uid="uid://1bdbouyccct4"]
 
 [ext_resource type="Texture2D" uid="uid://bgbnlykclyvy0" path="res://assets/player/player_debug.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ckftfp4m2mejv" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="AudioStream" uid="uid://cr4eo4p6i644r" path="res://assets/sound effects/player_death.wav" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://4xracdcpidic" path="res://assets/sound effects/player_hurt.wav" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -65,4 +66,5 @@ shape = SubResource("CapsuleShape2D_3vyb7")
 [node name="DeathSoundEffect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qhqgy")
 
-[connection signal="finished" from="DeathSoundEffect" to="." method="_on_death_sound_effect_finished"]
+[node name="HurtSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dqkch")

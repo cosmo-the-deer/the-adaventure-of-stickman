@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://3xom5wosewg3"]
+[gd_scene load_steps=19 format=4 uid="uid://3xom5wosewg3"]
 
 [ext_resource type="Texture2D" uid="uid://cd6cpvoaog05k" path="res://assets/tiles/world_tiles.png" id="1_46lwt"]
 [ext_resource type="Texture2D" uid="uid://dptabs7xir8xw" path="res://assets/tiles/background.png" id="1_x25rp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6cfl5n3mq3ix" path="res://scenes/platform.tscn" id="3_w7r7j"]
 [ext_resource type="PackedScene" uid="uid://bg6qhvfaem6ik" path="res://scenes/coin.tscn" id="4_o6mel"]
 [ext_resource type="PackedScene" uid="uid://cirwq428ivwja" path="res://scenes/death_zone.tscn" id="6_e7anx"]
+[ext_resource type="PackedScene" uid="uid://3dudg3qarc4e" path="res://scenes/spike.tscn" id="6_ly3hx"]
 [ext_resource type="FontFile" uid="uid://jfus1okqa1jo" path="res://assets/fonts/PressStart2P.ttf" id="7_ur00s"]
 [ext_resource type="Script" uid="uid://blubq375h7xt3" path="res://scripts/health_bar.gd" id="8_wndkh"]
 
@@ -125,6 +126,21 @@ texture = ExtResource("1_46lwt")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_x25rp")
 
+[sub_resource type="Animation" id="Animation_ly3hx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(819, -44)]
+}
+
 [sub_resource type="Animation" id="Animation_wndkh"]
 resource_name = "default"
 length = 3.0
@@ -140,21 +156,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(819, -44), Vector2(819, -44), Vector2(959, -44), Vector2(959, -44)]
-}
-
-[sub_resource type="Animation" id="Animation_ly3hx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(819, -44)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4n8tn"]
@@ -220,14 +221,6 @@ position = Vector2(-90, -40)
 [node name="Coin7" parent="Coins" instance=ExtResource("4_o6mel")]
 position = Vector2(-59, -41)
 
-[node name="Player" parent="." instance=ExtResource("3_gmgay")]
-position = Vector2(-15, -17)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(4, 4)
-limit_bottom = 120
-position_smoothing_enabled = true
-
 [node name="Zones" type="Node" parent="."]
 
 [node name="DeathZone" parent="Zones" instance=ExtResource("6_e7anx")]
@@ -246,6 +239,20 @@ rotation = 1.5708
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/WorldBorderLeft"]
 position = Vector2(0.999999, -33)
 shape = SubResource("WorldBoundaryShape2D_ur00s")
+
+[node name="Spikes" type="Node" parent="."]
+
+[node name="Spike" parent="Spikes" instance=ExtResource("6_ly3hx")]
+z_index = 1
+position = Vector2(216, -80)
+
+[node name="Player" parent="." instance=ExtResource("3_gmgay")]
+position = Vector2(-15, -17)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+limit_bottom = 120
+position_smoothing_enabled = true
 
 [node name="Ui" type="CanvasLayer" parent="."]
 

@@ -3,30 +3,41 @@ extends CharacterBody2D
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 
+@onready var hurt_sound_effect: AudioStreamPlayer2D = $HurtSoundEffect
 @onready var death_sound_effect: AudioStreamPlayer2D = $DeathSoundEffect
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 @export var max_health = 100
 var _current_health: int = max_health  # backing variable
 
 signal health_changed
 
+var coyote_jump := 0.0
+
 var current_health: int:
 	get:
 		return _current_health
 	set(value):
+		if value < _current_health:
+			hurt_sound_effect.play()
+			
 		_current_health = clamp(value, 0, max_health)
 		health_changed.emit()
-		print("Health set to:", _current_health)
-
-var coyote_jump := 0.0
+		if _current_health <= 0:
+			die()
 
 func die() -> void:
-	print("player died — current health: " + str(current_health))
-	current_health = 0  # optional, already 0 usually
+	velocity = Vector2.ZERO
+	collision_shape.queue_free()
+	velocity = Vector2(0, JUMP_VELOCITY)
 	death_sound_effect.play()
+	await get_tree().create_timer(2).timeout
+	get_tree().reload_current_scene()
+
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+
+	# Add gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -49,6 +60,3 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-
-func _on_death_sound_effect_finished() -> void:
-	get_tree().reload_current_scene()

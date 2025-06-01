@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4hfx02v1wiq0"]
+
+[ext_resource type="Script" uid="uid://810tpi30bht6" path="res://scripts/hurt_zone.gd" id="1_havby"]
+
+[node name="HurtZone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_havby")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
