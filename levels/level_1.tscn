@@ -1,3 +1,12 @@
 [gd_scene format=3 uid="uid://c70j5nw6je1l2"]
 
 [node name="Level1" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 518.0
+offset_top = 314.0
+offset_right = 1401.0
+offset_bottom = 587.0
+theme_override_font_sizes/font_size = 200
+text = "YOU WIN!
+    Owen"
