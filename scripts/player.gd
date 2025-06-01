@@ -31,7 +31,7 @@ func die() -> void:
 	collision_shape.queue_free()
 	velocity = Vector2(0, JUMP_VELOCITY)
 	death_sound_effect.play()
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1.2).timeout
 	get_tree().reload_current_scene()
 
 func apply_knockback(pos: Vector2, strength: int) -> void:
