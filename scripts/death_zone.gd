@@ -7,4 +7,4 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == player:
-		player.die()
+		player.current_health = 0

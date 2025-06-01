@@ -9,7 +9,6 @@ points = PackedVector2Array(-8, 16, 8, 16, 0, 0)
 [node name="Spike" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
 texture = ExtResource("1_ljd5v")
 region_enabled = true
 region_rect = Rect2(64, 96, 16, 16)
@@ -17,5 +16,5 @@ region_rect = Rect2(64, 96, 16, 16)
 [node name="HurtZone" parent="." instance=ExtResource("2_7a7y0")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone"]
-position = Vector2(0, -16)
+position = Vector2(0, -8)
 shape = SubResource("ConvexPolygonShape2D_7a7y0")

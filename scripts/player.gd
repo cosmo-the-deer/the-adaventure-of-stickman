@@ -35,7 +35,7 @@ func die() -> void:
 	get_tree().reload_current_scene()
 
 func apply_knockback(pos: Vector2, strength: int) -> void:
-	velocity = self.position - pos * strength
+	velocity = self.position + pos * strength
 
 func _physics_process(delta: float) -> void:
 
