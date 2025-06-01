@@ -8,5 +8,8 @@ func _ready() -> void:
 	update()
 
 func update():
-	print("Health changed to: " + str(player.current_health))
+	print("current health: " + str(player.current_health))
+	print("max health: " + str(player.max_health))
 	self.value = player.current_health
+	self.max_value = player.max_health
+	print("updated health bar")
