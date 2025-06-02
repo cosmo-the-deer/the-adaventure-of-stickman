@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbvqfggckeqh5"]
+
+[ext_resource type="Script" uid="uid://cx6o86dgvgmpq" path="res://scripts/start_zoomed_in.gd" id="1_jl045"]
+
+[node name="StartZoomedIn" type="Node"]
+script = ExtResource("1_jl045")

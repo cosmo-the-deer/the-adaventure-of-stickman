@@ -13,6 +13,7 @@ var _current_health: int = max_health  # backing variable
 signal health_changed
 
 var coyote_jump := 0.0
+var crl_locked := false
 
 var current_health: int:
 	get:
@@ -37,6 +38,10 @@ func die() -> void:
 func apply_knockback(pos: Vector2, strength: int) -> void:
 	velocity = self.position + pos * strength
 
+# locks / unlocks all interaction
+func set_locked(locked: bool):
+	crl_locked = locked
+
 func _physics_process(delta: float) -> void:
 
 	# Add gravity
@@ -50,15 +55,16 @@ func _physics_process(delta: float) -> void:
 		coyote_jump -= delta
 
 	# Jump
-	if Input.is_action_just_pressed("jump") and coyote_jump > 0.1:
+	if Input.is_action_just_pressed("jump") and coyote_jump > 0.1 and not crl_locked:
 		velocity.y = JUMP_VELOCITY
 		coyote_jump = 0
 
 	# Move left/right
-	var direction := Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	if not crl_locked:
+		var direction := Input.get_axis("move_left", "move_right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
