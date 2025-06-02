@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 			
 			if player:
 				player.current_health -= damage_amount
-				player.apply_knockback(self.position, 10)
+				player.apply_knockback(self.position, 1000)
 
 			# Reset timer
 			damage_timer = damage_interval

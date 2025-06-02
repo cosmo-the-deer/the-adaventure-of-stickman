@@ -29,6 +29,7 @@ var current_health: int:
 
 func die() -> void:
 	velocity = Vector2.ZERO
+	set_locked(true)
 	collision_shape.queue_free()
 	velocity = Vector2(0, JUMP_VELOCITY)
 	death_sound_effect.play()
@@ -36,7 +37,11 @@ func die() -> void:
 	get_tree().reload_current_scene()
 
 func apply_knockback(pos: Vector2, strength: int) -> void:
-	velocity = self.position + pos * strength
+	#add hit animation
+	var knockback_dir = (self.position - pos).normalized()
+	velocity += knockback_dir * strength
+
+
 
 # locks / unlocks all interaction
 func set_locked(locked: bool):
@@ -51,11 +56,11 @@ func _physics_process(delta: float) -> void:
 	# Coyote time
 	if is_on_floor():
 		coyote_jump = 0.5
-	elif coyote_jump > 0.1:
-		coyote_jump -= delta
+	elif coyote_jump > 0:
+		coyote_jump -= 0.1
 
 	# Jump
-	if Input.is_action_just_pressed("jump") and coyote_jump > 0.1 and not crl_locked:
+	if Input.is_action_just_pressed("jump") and coyote_jump > 0 and not crl_locked:
 		velocity.y = JUMP_VELOCITY
 		coyote_jump = 0
 
