@@ -8,7 +8,8 @@ var is_player_in_zone = false
 
 func _process(_delta: float) -> void:
 	if is_player_in_zone and Input.is_action_just_pressed("interact_on") and not player.crl_locked:
-		player.set_locked(true)
+		player.crl_locked = true
+		player.move_locked = true
 		camera.zoom_at_time(Vector2(8, 8), 2)
 		await get_tree().create_timer(2).timeout
 		get_tree().change_scene_to_packed(scene)

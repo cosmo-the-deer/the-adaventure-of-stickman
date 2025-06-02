@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://vg6ra58d0iks"]
+[gd_scene load_steps=15 format=4 uid="uid://vg6ra58d0iks"]
 
 [ext_resource type="Texture2D" uid="uid://dptabs7xir8xw" path="res://assets/tiles/background.png" id="1_jirdo"]
 [ext_resource type="Texture2D" uid="uid://cd6cpvoaog05k" path="res://assets/tiles/world_tiles.png" id="2_bt44k"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c2w0l76dblr38" path="res://scenes/ui.tscn" id="4_kx6l7"]
 [ext_resource type="PackedScene" uid="uid://bs6t8kpv8h1jd" path="res://scenes/main_camera.tscn" id="4_n46q3"]
 [ext_resource type="PackedScene" uid="uid://febrpwa5tpy8" path="res://scenes/warp_zone.tscn" id="7_gwceb"]
+[ext_resource type="PackedScene" uid="uid://bddcttfgw6wsl" path="res://levels/level_2.tscn" id="8_l53as"]
+[ext_resource type="Texture2D" uid="uid://4rklcw15kucq" path="res://assets/signs/sign1.png" id="9_3sk1a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kx6l7"]
 texture = ExtResource("2_bt44k")
@@ -153,7 +155,15 @@ tile_set = SubResource("TileSet_bt44k")
 [node name="Zones" type="Node" parent="."]
 
 [node name="WarpZone" parent="Zones" instance=ExtResource("7_gwceb")]
+scene = ExtResource("8_l53as")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/WarpZone"]
 position = Vector2(8, -111)
 shape = SubResource("RectangleShape2D_l53as")
+
+[node name="Signs" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Signs"]
+position = Vector2(34, -26)
+scale = Vector2(0.671875, 0.671875)
+texture = ExtResource("9_3sk1a")
