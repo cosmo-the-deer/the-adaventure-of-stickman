@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -300.0
 @onready var hurt_sound_effect: AudioStreamPlayer2D = $HurtSoundEffect
 @onready var death_sound_effect: AudioStreamPlayer2D = $DeathSoundEffect
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var max_health = 100
 var _current_health: int = max_health  # backing variable
@@ -52,7 +53,21 @@ func _physics_process(delta: float) -> void:
 	# Add gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
+	if not is_on_floor():
+		animated_sprite.animation = "jump"
+	else:
+		var direction := Input.get_axis("move_left", "move_right")
+		
+		if not crl_locked and direction:
+			velocity.x = direction * SPEED
+			animated_sprite.animation = "move"
+			animated_sprite.flip_h = direction < 0
+		elif not crl_locked:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			animated_sprite.animation = "idle"
 
+	
 	# Coyote time
 	if is_on_floor():
 		coyote_jump = 0.5
