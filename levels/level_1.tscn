@@ -127,6 +127,7 @@ texture = ExtResource("1_jirdo")
 sources/0 = SubResource("TileSetAtlasSource_jirdo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l53as"]
+size = Vector2(14, 32)
 
 [node name="Level1" type="Node2D"]
 
@@ -154,5 +155,5 @@ tile_set = SubResource("TileSet_bt44k")
 [node name="WarpZone" parent="Zones" instance=ExtResource("7_gwceb")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/WarpZone"]
-position = Vector2(8, -106)
+position = Vector2(8, -111)
 shape = SubResource("RectangleShape2D_l53as")
