@@ -153,7 +153,7 @@ scale = Vector2(0.40625, 0.40625)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.389738
+frame_progress = 0.489113
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
@@ -167,5 +167,3 @@ stream = ExtResource("4_dqkch")
 
 [node name="JumpSoundEffect" parent="." instance=ExtResource("5_tuyoq")]
 stream = ExtResource("6_fjrip")
-min_pitch = 0.8
-max_pitch = 1.2
